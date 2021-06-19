@@ -13,6 +13,7 @@ pipeline {
 				//maven 'maven3_0_5' 
 			}
             steps {
+	    // sh : shell script ==> Runs Bourne shell script
                 sh 'mvn --version'
             }
         }
