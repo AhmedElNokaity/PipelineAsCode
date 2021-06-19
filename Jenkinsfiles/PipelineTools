@@ -1,0 +1,20 @@
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+                    //refer to preinstalled sections under the global configuration in manage Jenkins
+                    // and makes them available for use in the pipeline script
+                    //   so we need to make sure that maven is installed in our Jenkins server
+                    //   then add maven Name and MAVEN_HOME in the global Tool configuration
+		    tools {   
+				maven 'maven3_5_2' 
+				//maven 'maven3_0_5' 
+			}
+            steps {
+                sh 'mvn --version'
+            }
+        }
+    }
+}
