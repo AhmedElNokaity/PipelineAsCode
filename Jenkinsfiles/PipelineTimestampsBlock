@@ -9,6 +9,7 @@ pipeline{
         stage('Build'){
 
             steps{
+	    // you can put timestamps at the pipeline level you will get a syntax error
                 timestamp{
                 echo "Hello World in Build"
                 echo "Hello World in Build Again"
