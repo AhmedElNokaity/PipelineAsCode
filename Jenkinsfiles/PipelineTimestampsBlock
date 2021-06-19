@@ -1,0 +1,28 @@
+// you may face issue with timestamps inside options section as https://github.com/AhmedElNokaity/PipelineAsCode/blob/main/Jenkinsfiles/PipelineStageOptionTimeStampsStageLevel
+// or https://github.com/AhmedElNokaity/PipelineAsCode/blob/main/Jenkinsfiles/PipelineStageOptionTimeStampsPipeLevel
+// JENKINS-48556 timestamps() randomly not recognized as a valid option
+// https://issues.jenkins.io/browse/JENKINS-48556?page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel
+
+pipeline{
+    agent any
+    stages{
+        stage('Build'){
+
+            steps{
+                timestamp{
+                echo "Hello World in Build"
+                echo "Hello World in Build Again"
+            
+                }
+            }
+        }
+		
+        stage('Test'){
+
+            steps{
+                echo "Hello World in Test"
+                echo "Hello World in Test Again"
+            }
+        }		
+    }
+}
