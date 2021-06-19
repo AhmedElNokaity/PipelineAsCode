@@ -1,0 +1,10 @@
+pipeline {	
+    agent any   // any || none || label || node  
+    stages {	
+        stage('Build') {	
+            steps {	
+                echo 'Hello World from the triggered Job'	
+            }	
+        }	
+    }	
+}	
