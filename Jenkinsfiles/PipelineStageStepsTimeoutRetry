@@ -1,0 +1,52 @@
+/*
+as per issue JENKINS-51454 Pipeline retry operation doesn't retry when there is a timeout inside of it
+Description
+When a timeout call is fired inside of a retry, retry is not being triggered 
+and job execution is aborted, the only way to make it work is by surrounding the timeout operation with a try/catch.
+https://stackoverflow.com/questions/59561757/retry-after-timeout-in-jenkins-pipeline-workarounds  
+
+Example:
+
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+
+retry(3) {
+
+  try {
+
+      timeout(time: 5, unit: 'MINUTES') {
+
+        // something that can fail
+
+      } // timeout ends
+
+  } catch (FlowInterruptedException e) {
+      // we re-throw as a different error, that would not 
+      // cause retry() to fail (workaround for issue JENKINS-51454)
+      error 'Timeout!'
+
+  } // try ends
+
+} // retry ends
+
+//TODO try this solution 
+*/
+
+
+
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                retry(3) {
+				    timeout(time: 1, unit: 'SECONDS') {
+							sleep 2
+					}
+                    echo "after timeout"
+                }
+            }
+        }
+    }
+}
+
+
