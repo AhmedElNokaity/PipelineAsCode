@@ -5,16 +5,17 @@ pipeline {
     stages {
         stage('Build') {
                     //refer to preinstalled sections under the global configuration in manage Jenkins
+		    //check it for install maven  https://stackoverflow.com/questions/46052711/extend-jenkins-image-to-install-maven
                     // and makes them available for use in the pipeline script
                     //   so we need to make sure that maven is installed in our Jenkins server
                     //   then add maven Name and MAVEN_HOME in the global Tool configuration
 		    tools {   
-				maven 'maven3_5_2' 
-				//maven 'maven3_0_5' 
+				maven 'maven3_6_0' 
+
 			}
             steps {
 	    // sh : shell script ==> Runs Bourne shell script
-                sh 'mvn --version'
+                sh 'mvn -v'
             }
         }
     }
