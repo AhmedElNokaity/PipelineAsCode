@@ -1,0 +1,30 @@
+pipeline {
+    agent none
+  
+    stages {
+        stage('Build') {
+                        agent any
+          options {
+            skipDefaultCheckout()
+          }
+              
+            steps {
+				echo "Hello World!"
+            }
+        }
+    }
+}
+
+/* https://github.com/jenkinsci/ghprb-plugin/issues/534  
+Credentials dropdown does not show newly created credentials
+The documentation needs to be updated to make it clear that 'Secret Text' 
+cannot be used with this plugin -- it must be a username / password credential.
+===
+Anyone struggling with the issue of trying to add credentials with username and password but not showing the creds on the dropdown, try this it worked for me.
+
+Jenkins > Credentials > System > Global Credentials (or whatever group you want to have access or your access allow) > Add Credentials.
+
+Then go back to the Source Code Management section of the project, and select the credentials from the dropdown.
+====
+
+*/
